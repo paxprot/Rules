@@ -1,0 +1,11 @@
+#!name=lofter
+#!desc=去app开屏广告和图片水印
+#!author=paxprot
+
+[MITM]
+hostname = %APPEND% imglf*.lf127.net,ad.lofter.com
+
+[Script]
+lofter-startupad = type=http-request,pattern=^https:\/\/ad\.lofter\.com
+
+lofter-watermark = type=http-request,pattern=^https:\/\/imglf.*\.lf127\.net\/img\/.*\/.*\.(jpg|png|gif).*, script-path=https://raw.githubusercontent.com/paxprot/rules/main/scripts/lofter.js
