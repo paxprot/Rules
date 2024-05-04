@@ -1,11 +1,10 @@
 #!name=lofter
-#!desc=去app开屏广告和图片水印
+#!desc=去除图片水印，移除版权保护
 #!author=paxprot
 
 [MITM]
-hostname = %APPEND% imglf*.lf127.net,ad.lofter.com
+hostname = %APPEND% api.lofter.com
 
 [Script]
-lofter-startupad = type=http-request,pattern=^https:\/\/ad\.lofter\.com
-
-lofter-watermark = type=http-request,pattern=^https:\/\/imglf.*\.lf127\.net\/img\/.*\/.*\.(jpg|png|gif).*, script-path=https://raw.githubusercontent.com/paxprot/rules/main/scripts/lofter.js
+lofter-watermark = type=http-response,pattern=^https:\/\/api\.lofter\.com\/v1\.1/watermarkcheck\.api,requires-body=1,script-path=https://raw.githubusercontent.com/paxprot/rules/main/scripts/lofter.js
+lofter-removeprotected = type=http-response,pattern=^https:\/\/api\.lofter\.com\/oldapi\/post\/detail\.api,requires-body=1,script-path=https://raw.githubusercontent.com/paxprot/rules/main/scripts/lofter.js
